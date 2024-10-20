@@ -1,0 +1,13 @@
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\bin\Debug\WeatherApp.exe.config
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\bin\Debug\WeatherApp.exe
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\bin\Debug\WeatherApp.pdb
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csproj.AssemblyReference.cache
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.Form1.resources
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.Properties.Resources.resources
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csproj.GenerateResource.cache
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csproj.CoreCompileInputs.cache
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.exe
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.pdb
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\bin\Debug\Newtonsoft.Json.dll
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\bin\Debug\Newtonsoft.Json.xml
+D:\STUDY\Lap Trinh Mang\WeatherApp\WeatherApp\obj\Debug\WeatherApp.csproj.Up2Date
