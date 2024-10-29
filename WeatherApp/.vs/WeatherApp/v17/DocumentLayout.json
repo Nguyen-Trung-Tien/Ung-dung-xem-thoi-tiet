@@ -1,0 +1,92 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\weatherapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|solutionrelative:weatherapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|d:\\study\\lap trinh mang\\weatherapp\\weatherapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|solutionrelative:weatherapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\weatherapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|solutionrelative:weatherapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\weatherapp\\weatherinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7933D452-BA49-4DDF-9C36-D193EE519827}|WeatherApp\\WeatherApp.csproj|solutionrelative:weatherapp\\weatherinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Form1.cs",
+              "RelativeDocumentMoniker": "WeatherApp\\Form1.cs",
+              "ToolTip": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Form1.cs",
+              "RelativeToolTip": "WeatherApp\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-26T10:47:36.6Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Form1.cs",
+              "RelativeDocumentMoniker": "WeatherApp\\Form1.cs",
+              "ToolTip": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Form1.cs [Design]",
+              "RelativeToolTip": "WeatherApp\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-25T13:33:03.391Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WeatherInfo.cs",
+              "DocumentMoniker": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\WeatherInfo.cs",
+              "RelativeDocumentMoniker": "WeatherApp\\WeatherInfo.cs",
+              "ToolTip": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\WeatherInfo.cs",
+              "RelativeToolTip": "WeatherApp\\WeatherInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-25T13:32:58.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Program.cs",
+              "RelativeDocumentMoniker": "WeatherApp\\Program.cs",
+              "ToolTip": "D:\\STUDY\\Lap Trinh Mang\\WeatherApp\\WeatherApp\\Program.cs",
+              "RelativeToolTip": "WeatherApp\\Program.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAmwAYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-25T13:32:54.173Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
