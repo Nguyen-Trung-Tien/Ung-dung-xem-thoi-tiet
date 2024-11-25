@@ -1,35 +1,41 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Linq;
-using System.Net.Http;
+using System.Net.Http; // giao thức HTTP để tải dữ liệu từ API
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Weather_Application.WeatherInfo;
+using System.Diagnostics;// Thư viện này sẽ giúp chúng ta mở trình duyệt web mặc định của máy tính
 
 namespace WeatherApp
 {
     public partial class Form1 : Form
     {
         private Timer timerDateTime;
+        private Timer timerWeatherUpdate;
+        private string currentCity;
+        private string currentCountry;
+        private HttpClient httpClient = new HttpClient();
         #region API Key
         private string APIKey = "68d42b9ada53b7dacca41373c7c14a71"; // API key
         #endregion
-        private HttpClient httpClient = new HttpClient();
-
-
         public Form1()
         {
             InitializeComponent();
-
             // Khởi tạo timer cho đồng hồ
             timerDateTime = new Timer { Interval = 1000 };
             timerDateTime.Tick += TimerDateTime_Tick;
             timerDateTime.Start();
-
+            timerWeatherUpdate = new Timer { Interval = 1800000 };
+            timerWeatherUpdate.Tick += TimerWeatherUpdate_Tick;
             // Bắt sự kiện khi nhấn Enter trong TextBox thành phố
             TBCity.KeyPress += TBCity_KeyPress;
+
+            // Kiểm tra kết nối internet
+            Task<bool> task = CheckInternetConnection();
 
             // Khởi tạo DataGridView
             InitializeDataGridView();
@@ -39,10 +45,25 @@ namespace WeatherApp
 
         }
 
+        // Kiểm tra kết nối với server OpenWeatherMap
+        private async Task<bool> CheckInternetConnection()
+        {
+            try
+            {
+                var response = await httpClient.GetAsync("https://openweathermap.org");
+                return response.IsSuccessStatusCode;
+            }
+            catch
+            {
+                MessageBox.Show("Không thể kết nối với máy chủ, vui lòng kiểm tra kết nối internet",
+                    "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
         // Xử lý sự kiện khi thay đổi nội dung trong TextBox thành phố
         private async Task TBCity_TextChangedAsync(object sender, EventArgs e)
         {
-
             string input = TBCity.Text.Trim();
             if (input.Length >= 3)
             {
@@ -54,12 +75,27 @@ namespace WeatherApp
                     TBCity.AutoCompleteCustomSource = autoCompleteCollection;
                 }
             }
+            // Xóa dữ liệu cũ khi người dùng xóa hết nội dung trong TextBox
+            if (string.IsNullOrEmpty(input))
+            {
+                TBCity.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+            }
         }
+        
 
+        // Xử lý sự kiện khi nhấn Enter trong TextBox thành phố
+        private async void TimerWeatherUpdate_Tick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentCity))
+            {
+                await GetWeatherByCity(currentCity);// Lấy thông tin thời tiết theo thành phố
+            }
+        }
 
         // Khởi tạo DataGridView
         private void InitializeDataGridView()
         {
+            DataGridView grid = new DataGridView(); // Tạo một DataGridView mới
             // Xóa cột cũ và thiết lập cơ bản
             dataGridView1.Columns.Clear();
             dataGridView1.TopLeftHeaderCell.Value = "Thời tiết trong tuần";
@@ -67,7 +103,7 @@ namespace WeatherApp
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
             // Thêm các cột với cấu hình riêng lẻ
-            AddTextColumn("DayOfWeek", "Thứ", 20);
+            AddTextColumn("DayOfWeek", "Thứ", 50);
             AddTextColumn("Date", "Ngày", 100);
             AddTextColumn("Temperature", "Nhiệt Độ", 30);
             AddTextColumn("Condition", "Trạng Thái", 100);
@@ -77,7 +113,7 @@ namespace WeatherApp
         // Thêm cột văn bản
         private void AddTextColumn(string columnName, string headerText, int width)
         {
-            var column = new DataGridViewTextBoxColumn
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn
             {
                 Name = columnName,
                 HeaderText = headerText,
@@ -90,13 +126,12 @@ namespace WeatherApp
         // Thêm cột hình ảnh
         private void AddImageColumn(string columnName, string headerText, int width)
         {
-            var imageColumn = new DataGridViewImageColumn
-            {
-                Name = columnName,
-                HeaderText = headerText,
-                ImageLayout = DataGridViewImageCellLayout.Zoom,
-                Width = width,
-            };
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.Name = columnName;
+            imageColumn.HeaderText = headerText;
+            imageColumn.Width = width;
+            imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            imageColumn.DefaultCellStyle.BackColor = Color.DodgerBlue;
             dataGridView1.Columns.Add(imageColumn);
         }
 
@@ -105,6 +140,17 @@ namespace WeatherApp
         {
             string city = TBCity.Text.Trim();
             await GetWeatherByCity();
+            await CheckInternetConnection();
+        }
+
+        // Xử lý sự kiện khi nhấn nút Location
+        private async void btnLocation_Click(object sender, EventArgs e)
+        {
+            await GetCurrentLocationWeather();
+            await GetWeatherByCity();
+            // Kiểm tra kết nối internet
+            await CheckInternetConnection();
+
         }
 
         // Xử lý sự kiện khi nhấn Enter trong TextBox thành phố
@@ -126,9 +172,13 @@ namespace WeatherApp
             TBCity.AutoCompleteSource = AutoCompleteSource.CustomSource;
         }
 
-        private async Task GetWeatherByCity()
+        // Lấy gợi ý thành phố từ OpenWeatherMap Geo API
+        private async Task GetWeatherByCity(string city = null)
         {
-            string city = TBCity.Text.Trim();
+            if (city == null)
+            {
+                city = TBCity.Text.Trim();
+            }
 
             if (string.IsNullOrWhiteSpace(city))
             {
@@ -143,7 +193,7 @@ namespace WeatherApp
                 var forecastInfo = await GetForecast(city);
 
                 // Cập nhật giao diện
-                UpdateCurrentWeather(currentInfo);
+                await UpdateCurrentWeather(currentInfo);
                 await UpdateForecast(forecastInfo);
 
                 // Kiểm tra và hiển thị thông báo thiên tai
@@ -173,7 +223,7 @@ namespace WeatherApp
         }
 
         // Kiểm tra và hiển thị thông báo thiên tai
-        private async void ShowWarningMessage(string message)
+        private async Task ShowWarningMessage(string message)
         {
             MessageBox.Show(message);
             await Task.Delay(10000);
@@ -220,7 +270,7 @@ namespace WeatherApp
 
                 // Cập nhật giao diện
                 TBCity.Text = city;
-                UpdateCurrentWeather(currentInfo);
+                await UpdateCurrentWeather(currentInfo);
                 await UpdateForecast(forecastInfo);
                 await Update7DayForecast(forecastInfo);
                 Update3HourChart(forecastInfo);
@@ -232,7 +282,7 @@ namespace WeatherApp
                 MessageBox.Show("Có lỗi xảy ra: " + ex.Message);
             }
         }
-        
+
         // Lấy tên thành phố hiện tại dựa trên IP
         private async Task<string> GetCurrentCity()
         {
@@ -243,11 +293,11 @@ namespace WeatherApp
         }
 
         // Cập nhật giao diện với thông tin thời tiết hiện tại
-        private void UpdateCurrentWeather(root currentInfo)
+        private async Task UpdateCurrentWeather(root currentInfo)
         {
             picIcon.LoadAsync("https://openweathermap.org/img/wn/" + currentInfo.weather[0].icon + ".png");
-            labCondition.Text = currentInfo.weather[0].main;
-            labCondition.Text = currentInfo.weather[0].description;
+            //labCondition.Text = currentInfo.weather[0].main;
+            //labCondition.Text = currentInfo.weather[0].description;
             labSunset.Text = ConvertDateTime(currentInfo.sys.sunset).ToShortTimeString();
             labSunrise.Text = ConvertDateTime(currentInfo.sys.sunrise).ToShortTimeString();
             labTemp_max.Text = $"{currentInfo.main.temp_max - 273} °C";
@@ -259,6 +309,56 @@ namespace WeatherApp
             labHumidity.Text = $"{currentInfo.main.humidity} %";
             labFeels_like.Text = $"{currentInfo.main.feels_like - 273} °C";
 
+            string district = await GetDistrict(currentInfo);
+            if (!string.IsNullOrEmpty(district))
+            {
+                labDistrict.Text = district;
+                labDistrict.Visible = true;
+            }
+            else
+            {
+                labDistrict.Visible = false;
+            }
+
+            tempCelsius = currentInfo.main.temp - 273;
+            labTemperature.Text = $"{tempCelsius:0.#}°C";
+
+            // Tô màu đỏ nếu nhiệt độ cao
+            if (tempCelsius >= 30)
+            {
+                labTemperature.ForeColor = Color.Red;
+            }
+            else
+            {
+                labTemperature.ForeColor = SystemColors.Window; // Màu mặc định
+            }
+
+            // Gợi ý địa điểm mát mẻ nếu nhiệt độ cao
+            if (tempCelsius > 30)
+            {
+                string coolPlaces = "Đà Lạt, Sapa, Tam Đảo, Vịnh Hạ Long, Phú Quốc, Nha Trang, Hội An, Huế, Đà Nẵng..."; // Thay bằng danh sách địa điểm mát mẻ
+                labCoolPlaces.Text = $"Địa điểm mát mẻ: {coolPlaces}";
+                labCoolPlaces.Visible = true;
+
+                // Gợi ý tour du lịch
+                string tourSuggestions = "Tour Đà Lạt 3 ngày 2 đêm, Tour Sapa trekking, Tour Hạ Long 2 ngày 1 đêm,...";
+                labTourSuggestions.Text = $"Tour gợi ý: {tourSuggestions}";
+                labTourSuggestions.Visible = true;
+
+                // Thêm sự kiện click để mở link công ty du lịch 
+                labTourSuggestions.Click += (sender, e) =>
+                {
+                    Process.Start("https://www.vietourist.com.vn/vn/");
+                };
+                labTourSuggestions.Cursor = Cursors.Hand; // Thay đổi con trỏ chuột để thể hiện là link
+
+            }
+            else
+            {
+                labCoolPlaces.Visible = false;
+                labTourSuggestions.Visible = false;
+            }
+
             // Cập nhật hình nền dựa trên điều kiện thời tiết
             UpdateBackground(currentInfo.weather[0].main);
 
@@ -266,12 +366,43 @@ namespace WeatherApp
             UpdateWeatherAdvice(currentInfo.weather[0].description.ToLower());
         }
 
+        // Lấy thông tin quận/huyện từ API OpenWeatherMap
+        private async Task<string> GetDistrict(root currentInfo)
+        {
+            if (currentInfo == null || currentInfo.coord == null)
+            {
+                return null;
+            }
+
+            string district = null;
+            try
+            {
+                string url = $"http://api.openweathermap.org/geo/1.0/reverse?lat={currentInfo.coord.lat}&lon={currentInfo.coord.lon}&limit=1&appid={APIKey}";
+                HttpResponseMessage response = await httpClient.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseData = await response.Content.ReadAsStringAsync();
+                    var locationData = JsonConvert.DeserializeObject<List<GeoLocation>>(responseData);
+                    if (locationData != null && locationData.Count > 0)
+                    {
+                        district = locationData[0].name;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Lỗi Không tìm thấy quận huyện!: {ex.Message}");
+            }
+
+            return district;
+        }
+
 
         // Cập nhật hình nền dựa trên điều kiện thời tiết
         private void UpdateBackground(string weatherCondition)
         {
             // Đặt hình nền mặc định là trời nắng
-            string backgroundImage = "bg4.jpg";
+            string backgroundImage = "nang.jpg";
             switch (weatherCondition.ToLower())
             {
                 case "clear":
@@ -308,10 +439,10 @@ namespace WeatherApp
                     backgroundImage = "mua2.jpg"; // Hình nền cho trời dông
                     break;
                 case "light rain":
-                    backgroundImage = "muanho.jpg"; // Hình nền cho mưa nhỏ
+                    backgroundImage = "amu.jpg"; // Hình nền cho mưa nhỏ
                     break;
                 case "moderate rain":
-                    backgroundImage = "muavua.jpg"; // Hình nền cho mưa vừa
+                    backgroundImage = "amu.jpg"; // Hình nền cho mưa vừa
                     break;
                 case "heavy intensity rain":
                     backgroundImage = "mua2.jpg"; // Hình nền cho mưa lớn
@@ -347,10 +478,11 @@ namespace WeatherApp
                     backgroundImage = "suongmu.jpg"; // Hình nền cho sương mù dày đặc
                     break;
                 default:
-                    backgroundImage = "bg4.jpg"; // Hình nền mặc định nếu không rõ điều kiện thời tiết
+                    backgroundImage = "nang.jpg"; // Hình nền mặc định nếu không rõ điều kiện thời tiết
                     break;
             }
             this.BackgroundImage = Image.FromFile(backgroundImage); // Thiết lập hình nền cho form
+            this.BackgroundImageLayout = ImageLayout.Stretch; // Để hình nền căng
         }
 
         // Cập nhật dữ liệu dự báo thời tiết
@@ -403,9 +535,9 @@ namespace WeatherApp
             {
                 dataGridView1.Rows[i].Cells["WeatherIcon"].Value = images[i];
                 dataGridView1.Rows[i].Height = 100; // Điều chỉnh chiều cao hàng cho vừa hình ảnh
+                dataGridView1.Rows[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Căn giữa hình ảnh
             }
         }
-
 
         // Lấy dữ liệu dự báo cho 7 ngày tiếp theo
         private List<Forecast> GetNext7DaysForecasts(ForecastRoot forecastInfo)
@@ -430,13 +562,13 @@ namespace WeatherApp
             return fourHourForecasts;
         }
 
+        // Cập nhật biểu đồ dự báo 3 giờ
         private void Update3HourChart(ForecastRoot forecastInfo)
         {
             chart1.Series[0].Points.Clear();
 
             var hourlyForecasts = Get3HourForecasts(forecastInfo);
 
-            // Sử dụng DateTime để lưu trữ thời điểm dự báo đầu tiên
             DateTime initialForecastTime = DateTime.MinValue;
 
             for (int i = 0; i < hourlyForecasts.Count; i++)
@@ -445,22 +577,26 @@ namespace WeatherApp
                 DateTime forecastDateTime = ConvertDateTime(forecast.dt);
                 double tempCelsius = forecast.main.temp - 273;
 
-
-                // Chỉ hiển thị nhãn thời gian cho dự báo đầu tiên
-                string timeLabel = "";
                 if (initialForecastTime == DateTime.MinValue)
                 {
                     initialForecastTime = forecastDateTime;
-                    timeLabel = initialForecastTime.ToString("dd/MM HH:mm"); // Hiển thị ngày tháng và giờ
                 }
 
-
-                // Thêm dữ liệu dự báo vào biểu đồ, không cần đặt AxisLabel nữa
-
                 chart1.Series[0].Name = "Nhiệt độ";
-                chart1.Series[0].Points.AddXY(i, tempCelsius); // Sử dụng i làm vị trí trên trục X
-                chart1.Series[0].Points[i].ToolTip = $"{forecastDateTime.ToString("dd/MM HH:mm")}\n{tempCelsius:0.#}°C";
+                chart1.Series[0].Points.AddXY(i, tempCelsius);
+                chart1.Series[0].Points[i].ToolTip = $"{forecastDateTime:dd/MM HH:mm}\n{tempCelsius:0.#}°C";
                 chart1.Series[0].Points[i].Label = $"{tempCelsius:0.#}°C";
+
+                // Tô màu đỏ nếu nhiệt độ trên 30 độ
+                if (tempCelsius >= 30)
+                {
+                    chart1.Series[0].Points[i].Color = Color.Red; // Tô cột màu đỏ
+                }
+                else
+                {
+                    // Màu mặc định
+                    chart1.Series[0].Points[i].Color = Color.Blue; 
+                }
             }
 
             // Cập nhật trục X với các nhãn thời gian cách nhau 4 giờ
@@ -472,10 +608,9 @@ namespace WeatherApp
             chart1.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
             chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
 
-
             for (int i = 0; i < hourlyForecasts.Count; i++)
             {
-                DateTime labelTime = initialForecastTime.AddHours(i * 4);
+                DateTime labelTime = initialForecastTime.AddHours(i * 5);// Cập nhật nhãn thời gian cách nhau 4 giờ
                 var label = new System.Windows.Forms.DataVisualization.Charting.CustomLabel
                 {
                     Text = labelTime.ToString("HH:mm"),
@@ -484,10 +619,7 @@ namespace WeatherApp
                 };
                 chart1.ChartAreas[0].AxisX.CustomLabels.Add(label);
             }
-
-
         }
-
 
         // Lấy dữ liệu hình ảnh từ URL
         private async Task<Bitmap> GetImageFromUrl(string url)
@@ -503,6 +635,7 @@ namespace WeatherApp
                 }
                 else
                 {
+                    // Trả về null nếu không thể tải hình ảnh
                     return null;
                 }
             }
@@ -515,28 +648,11 @@ namespace WeatherApp
             return dateTimeOffset.DateTime.ToLocalTime();
         }
 
-
         // Cập nhật đồng hồ
         private void TimerDateTime_Tick(object sender, EventArgs e)
         {
             labDateTime.Text = DateTime.Now.ToString("HH:mm:ss");
             labDateTime2.Text = DateTime.Now.ToString("dddd, dd - M - yyyy");
-        }
-
-        // Xử lý sự kiện khi nhấn nút Location
-        private async void btnLocation_Click(object sender, EventArgs e)
-        {
-            await GetCurrentLocationWeather();
-        }
-
-        // Xử lý sự kiện khi nhấn nút Show
-        private async void btnShow_Click(object sender, EventArgs e)
-        {
-            string city = TBCity.Text.Trim();
-            if (!string.IsNullOrWhiteSpace(city))
-            {
-                await GetWeatherByCity();
-            }
         }
 
         // Biến để kiểm tra xem cảnh báo bão đã được hiển thị hay chưa
@@ -551,7 +667,7 @@ namespace WeatherApp
             {
                 case "light rain":
                     labDetail2.Text = "Mưa nhỏ";
-                    labAdvice.Text = "Trời mưa nhẹ, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời mưa nhỏ, bạn nên mang theo ô đề phòng.";
                     break;
                 case "scattered clouds":
                     labDetail2.Text = "Mây rải rác";
@@ -563,7 +679,7 @@ namespace WeatherApp
                     break;
                 case "light intensity drizzle":
                     labDetail2.Text = "Mưa phùn nhỏ";
-                    labAdvice.Text = "Trời mưa phùn nhỏ, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời mưa phùn nhỏ, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "drizzle":
                     labDetail2.Text = "Mưa phùn";
@@ -571,7 +687,7 @@ namespace WeatherApp
                     break;
                 case "heavy intensity drizzle":
                     labDetail2.Text = "Mưa phùn lớn";
-                    labAdvice.Text = "Trời mưa phùn lớn, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời mưa phùn lớn, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "clear sky":
                     labDetail2.Text = "Trời quang đãng";
@@ -587,7 +703,11 @@ namespace WeatherApp
                     break;
                 case "moderate rain":
                     labDetail2.Text = "Mưa nhỏ";
-                    labAdvice.Text = "Trời sẽ mưa, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời có sẽ mưa, bạn nên mang theo ô đề phòng.";
+                    break;
+                case "rain":
+                    labDetail2.Text = "Mưa";
+                    labAdvice.Text = "Trời mưa, bạn nên mang theo ô đề phòng.";
                     break;
                 case "heavy intensity rain":
                     labDetail2.Text = "Mưa lớn";
@@ -607,15 +727,15 @@ namespace WeatherApp
                     break;
                 case "light intensity shower rain":
                     labDetail2.Text = "Mưa rào";
-                    labAdvice.Text = "Trời có mưa rào, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời có mưa rào, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "shower rain":
                     labDetail2.Text = "Mưa rào";
-                    labAdvice.Text = "Trời có mưa rào, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời có mưa rào, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "heavy intensity shower rain":
                     labDetail2.Text = "Mưa rào lớn";
-                    labAdvice.Text = "Trời có mưa rào lớn, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời có mưa rào lớn, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "fog":
                     labDetail2.Text = "Sương mù";
@@ -625,7 +745,6 @@ namespace WeatherApp
                     labDetail2.Text = "Dông";
                     labAdvice.Text = "Trời có dông nguy hiểm, bạn nên ở trong nhà đên khi hết mưa.";
                     MessageBox.Show("Cảnh báo: Có mưa dông! Bạn cẩn thận khi đi ra ngoài.", "Cảnh báo dông", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                     break;
                 case "clouds":
                     labDetail2.Text = "Mây";
@@ -633,18 +752,17 @@ namespace WeatherApp
                     break;
                 case "thunderstorm with light rain":
                     labDetail2.Text = "Dông và mưa nhỏ";
-                    labAdvice.Text = "Trời có dông với mưa nhỏ, bạn nên ở trong nhà.";
+                    labAdvice.Text = "Trời có dông với mưa, bạn nên ở trong nhà.";
                     MessageBox.Show("Cảnh báo: Có mưa dông! Bạn cẩn thận khi đi ra ngoài.", "Cảnh báo dông", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case "thunderstorm with rain":
                     labDetail2.Text = "Dông và mưa";
                     labAdvice.Text = "Trời có dông với mưa, bạn nên ở trong nhà.";
                     MessageBox.Show("Cảnh báo: Có mưa dông! Bạn cẩn thận khi đi ra ngoài.", "Cảnh báo dông", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
                     break;
                 case "thunderstorm with heavy rain":
                     labDetail2.Text = "Dông với mưa lớn";
-                    labAdvice.Text = "Trời có dông với mưa lớn, bạn nên ở trong nhà.";
+                    labAdvice.Text = "Trời có dông và mưa lớn, bạn nên ở trong nhà.";
                     MessageBox.Show("Cảnh báo: Có mưa dông! Bạn cẩn thận khi đi ra ngoài.", "Cảnh báo dông", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 case "thunderstorm with light drizzle":
@@ -667,7 +785,7 @@ namespace WeatherApp
                     break;
                 case "overcast":
                     labDetail2.Text = "Trời âm u";
-                    labAdvice.Text = "Trời sẽ có mưa, bạn nên mang theo ô đề phòng.";
+                    labAdvice.Text = "Trời sẽ có mưa, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
 
                 // Các trường hợp cảnh báo đặc biệt nguy hiểm!
@@ -707,9 +825,5 @@ namespace WeatherApp
                     break;
             }
         }
-
-       
     }
-
-
 }

@@ -43,7 +43,6 @@
             this.labTemp_min = new System.Windows.Forms.Label();
             this.labTemp_max = new System.Windows.Forms.Label();
             this.labAdvice = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labDetail2 = new System.Windows.Forms.Label();
             this.labFeels_like = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -59,24 +58,28 @@
             this.labPressure = new System.Windows.Forms.Label();
             this.btnLocation = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.labCondition = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.labDistrict = new System.Windows.Forms.Label();
+            this.labCoolPlaces = new System.Windows.Forms.Label();
+            this.labTourSuggestions = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label15
             // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label15.Location = new System.Drawing.Point(654, 249);
+            this.label15.Location = new System.Drawing.Point(278, 247);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(23, 35);
             this.label15.TabIndex = 67;
@@ -84,11 +87,12 @@
             // 
             // labTemperature
             // 
+            this.labTemperature.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labTemperature.AutoSize = true;
             this.labTemperature.BackColor = System.Drawing.Color.Transparent;
             this.labTemperature.Font = new System.Drawing.Font("Times New Roman", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemperature.ForeColor = System.Drawing.Color.Transparent;
-            this.labTemperature.Location = new System.Drawing.Point(533, 109);
+            this.labTemperature.Location = new System.Drawing.Point(544, 88);
             this.labTemperature.Name = "labTemperature";
             this.labTemperature.Size = new System.Drawing.Size(192, 135);
             this.labTemperature.TabIndex = 54;
@@ -96,11 +100,12 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnSearch.BackColor = System.Drawing.Color.Transparent;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnSearch.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(1055, 61);
+            this.btnSearch.Location = new System.Drawing.Point(1063, 46);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(96, 33);
             this.btnSearch.TabIndex = 53;
@@ -110,6 +115,7 @@
             // 
             // TBCity
             // 
+            this.TBCity.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.TBCity.AutoCompleteCustomSource.AddRange(new string[] {
             "Quận 1",
             "Quận 2",
@@ -135,7 +141,7 @@
             "Phú Nhuận",
             "Thủ Đức",
             "An Giang",
-            "Bà rịa Vũng Tàu",
+            "Vũng Tàu",
             "Bạc Liêu",
             "Bắc Giang",
             "Bắc Kạn",
@@ -199,7 +205,7 @@
             "Tỉnh Yên Bái",
             "============",
             "============",
-            "",
+            "Ấn Độ",
             "Aland Islands",
             "Albania",
             "Algeria",
@@ -453,18 +459,20 @@
             this.TBCity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TBCity.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBCity.ForeColor = System.Drawing.Color.Black;
-            this.TBCity.Location = new System.Drawing.Point(346, 65);
+            this.TBCity.Location = new System.Drawing.Point(366, 50);
+            this.TBCity.Multiline = true;
             this.TBCity.Name = "TBCity";
-            this.TBCity.Size = new System.Drawing.Size(686, 27);
+            this.TBCity.Size = new System.Drawing.Size(686, 22);
             this.TBCity.TabIndex = 52;
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(200, 68);
+            this.label1.Location = new System.Drawing.Point(200, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(128, 25);
             this.label1.TabIndex = 51;
@@ -484,8 +492,10 @@
             // 
             // picIcon
             // 
+            this.picIcon.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.picIcon.BackColor = System.Drawing.Color.Transparent;
-            this.picIcon.Location = new System.Drawing.Point(872, 109);
+            this.picIcon.ErrorImage = null;
+            this.picIcon.Location = new System.Drawing.Point(869, 92);
             this.picIcon.Name = "picIcon";
             this.picIcon.Size = new System.Drawing.Size(180, 141);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -498,7 +508,7 @@
             this.labDateTime.BackColor = System.Drawing.Color.Transparent;
             this.labDateTime.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labDateTime.ForeColor = System.Drawing.Color.White;
-            this.labDateTime.Location = new System.Drawing.Point(27, 14);
+            this.labDateTime.Location = new System.Drawing.Point(40, 14);
             this.labDateTime.Name = "labDateTime";
             this.labDateTime.Size = new System.Drawing.Size(56, 25);
             this.labDateTime.TabIndex = 56;
@@ -506,11 +516,12 @@
             // 
             // labTemp_min
             // 
+            this.labTemp_min.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labTemp_min.AutoSize = true;
             this.labTemp_min.BackColor = System.Drawing.Color.Transparent;
             this.labTemp_min.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemp_min.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labTemp_min.Location = new System.Drawing.Point(575, 249);
+            this.labTemp_min.Location = new System.Drawing.Point(199, 247);
             this.labTemp_min.Name = "labTemp_min";
             this.labTemp_min.Size = new System.Drawing.Size(66, 35);
             this.labTemp_min.TabIndex = 49;
@@ -518,11 +529,12 @@
             // 
             // labTemp_max
             // 
+            this.labTemp_max.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labTemp_max.AutoSize = true;
             this.labTemp_max.BackColor = System.Drawing.Color.Transparent;
             this.labTemp_max.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labTemp_max.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labTemp_max.Location = new System.Drawing.Point(672, 249);
+            this.labTemp_max.Location = new System.Drawing.Point(296, 247);
             this.labTemp_max.Name = "labTemp_max";
             this.labTemp_max.Size = new System.Drawing.Size(66, 35);
             this.labTemp_max.TabIndex = 50;
@@ -540,18 +552,6 @@
             this.labAdvice.TabIndex = 62;
             this.labAdvice.Text = "Lời khuyên";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.AliceBlue;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(859, 506);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(565, 278);
-            this.dataGridView1.TabIndex = 61;
-            // 
             // labDetail2
             // 
             this.labDetail2.AutoSize = true;
@@ -566,11 +566,12 @@
             // 
             // labFeels_like
             // 
+            this.labFeels_like.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labFeels_like.AutoSize = true;
             this.labFeels_like.BackColor = System.Drawing.Color.Transparent;
             this.labFeels_like.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labFeels_like.ForeColor = System.Drawing.SystemColors.Menu;
-            this.labFeels_like.Location = new System.Drawing.Point(388, 249);
+            this.labFeels_like.Location = new System.Drawing.Point(386, 304);
             this.labFeels_like.Name = "labFeels_like";
             this.labFeels_like.Size = new System.Drawing.Size(66, 35);
             this.labFeels_like.TabIndex = 15;
@@ -578,11 +579,12 @@
             // 
             // label13
             // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label13.Location = new System.Drawing.Point(190, 249);
+            this.label13.Location = new System.Drawing.Point(190, 304);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(200, 35);
             this.label13.TabIndex = 14;
@@ -590,11 +592,12 @@
             // 
             // labHumidity
             // 
+            this.labHumidity.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labHumidity.AutoSize = true;
             this.labHumidity.BackColor = System.Drawing.Color.Transparent;
             this.labHumidity.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labHumidity.ForeColor = System.Drawing.SystemColors.Window;
-            this.labHumidity.Location = new System.Drawing.Point(541, 342);
+            this.labHumidity.Location = new System.Drawing.Point(612, 351);
             this.labHumidity.Name = "labHumidity";
             this.labHumidity.Size = new System.Drawing.Size(51, 25);
             this.labHumidity.TabIndex = 69;
@@ -602,11 +605,12 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox6.BackgroundImage")));
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox6.ErrorImage = null;
-            this.pictureBox6.Location = new System.Drawing.Point(828, 293);
+            this.pictureBox6.Location = new System.Drawing.Point(912, 302);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(58, 46);
             this.pictureBox6.TabIndex = 20;
@@ -614,12 +618,13 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Cursor = System.Windows.Forms.Cursors.AppStarting;
             this.pictureBox2.ErrorImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(540, 293);
+            this.pictureBox2.Location = new System.Drawing.Point(624, 302);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(52, 46);
             this.pictureBox2.TabIndex = 68;
@@ -627,11 +632,12 @@
             // 
             // labSunset
             // 
+            this.labSunset.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labSunset.AutoSize = true;
             this.labSunset.BackColor = System.Drawing.Color.Transparent;
             this.labSunset.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labSunset.ForeColor = System.Drawing.SystemColors.Window;
-            this.labSunset.Location = new System.Drawing.Point(320, 166);
+            this.labSunset.Location = new System.Drawing.Point(320, 194);
             this.labSunset.Name = "labSunset";
             this.labSunset.Size = new System.Drawing.Size(51, 25);
             this.labSunset.TabIndex = 9;
@@ -639,11 +645,12 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.ErrorImage = null;
-            this.pictureBox4.Location = new System.Drawing.Point(687, 293);
+            this.pictureBox4.Location = new System.Drawing.Point(771, 302);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(52, 46);
             this.pictureBox4.TabIndex = 10;
@@ -651,11 +658,12 @@
             // 
             // labSunrise
             // 
+            this.labSunrise.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labSunrise.AutoSize = true;
             this.labSunrise.BackColor = System.Drawing.Color.Transparent;
             this.labSunrise.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labSunrise.ForeColor = System.Drawing.SystemColors.Window;
-            this.labSunrise.Location = new System.Drawing.Point(191, 166);
+            this.labSunrise.Location = new System.Drawing.Point(191, 194);
             this.labSunrise.Name = "labSunrise";
             this.labSunrise.Size = new System.Drawing.Size(51, 25);
             this.labSunrise.TabIndex = 6;
@@ -663,11 +671,12 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.ErrorImage = null;
-            this.pictureBox3.Location = new System.Drawing.Point(316, 117);
+            this.pictureBox3.Location = new System.Drawing.Point(316, 145);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(52, 46);
             this.pictureBox3.TabIndex = 7;
@@ -675,11 +684,12 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox5.ErrorImage = null;
-            this.pictureBox5.Location = new System.Drawing.Point(197, 117);
+            this.pictureBox5.Location = new System.Drawing.Point(197, 145);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(54, 46);
             this.pictureBox5.TabIndex = 0;
@@ -687,11 +697,12 @@
             // 
             // labWindSpeed
             // 
+            this.labWindSpeed.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labWindSpeed.AutoSize = true;
             this.labWindSpeed.BackColor = System.Drawing.Color.Transparent;
             this.labWindSpeed.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labWindSpeed.ForeColor = System.Drawing.SystemColors.Window;
-            this.labWindSpeed.Location = new System.Drawing.Point(688, 342);
+            this.labWindSpeed.Location = new System.Drawing.Point(759, 351);
             this.labWindSpeed.Name = "labWindSpeed";
             this.labWindSpeed.Size = new System.Drawing.Size(51, 25);
             this.labWindSpeed.TabIndex = 11;
@@ -699,11 +710,12 @@
             // 
             // labPressure
             // 
+            this.labPressure.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labPressure.AutoSize = true;
             this.labPressure.BackColor = System.Drawing.Color.Transparent;
             this.labPressure.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labPressure.ForeColor = System.Drawing.SystemColors.Window;
-            this.labPressure.Location = new System.Drawing.Point(835, 338);
+            this.labPressure.Location = new System.Drawing.Point(906, 347);
             this.labPressure.Name = "labPressure";
             this.labPressure.Size = new System.Drawing.Size(51, 25);
             this.labPressure.TabIndex = 13;
@@ -711,11 +723,12 @@
             // 
             // btnLocation
             // 
+            this.btnLocation.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnLocation.BackColor = System.Drawing.Color.Transparent;
             this.btnLocation.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnLocation.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLocation.ForeColor = System.Drawing.Color.White;
-            this.btnLocation.Location = new System.Drawing.Point(1166, 61);
+            this.btnLocation.Location = new System.Drawing.Point(1174, 46);
             this.btnLocation.Name = "btnLocation";
             this.btnLocation.Size = new System.Drawing.Size(96, 34);
             this.btnLocation.TabIndex = 70;
@@ -725,45 +738,108 @@
             // 
             // chart1
             // 
-            this.chart1.BackColor = System.Drawing.SystemColors.Window;
+            this.chart1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.chart1.BackImageTransparentColor = System.Drawing.Color.Transparent;
             this.chart1.BackSecondaryColor = System.Drawing.Color.Transparent;
             this.chart1.BorderlineColor = System.Drawing.Color.Transparent;
+            chartArea1.AlignmentOrientation = ((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations)((System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Vertical | System.Windows.Forms.DataVisualization.Charting.AreaAlignmentOrientations.Horizontal)));
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.BackImageTransparentColor = System.Drawing.Color.Transparent;
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
+            this.chart1.Cursor = System.Windows.Forms.Cursors.Hand;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(25, 506);
+            this.chart1.Location = new System.Drawing.Point(12, 488);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.None;
+            this.chart1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series1.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            series1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series1.BorderColor = System.Drawing.Color.Transparent;
             series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.DodgerBlue;
+            series1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            series1.LabelBackColor = System.Drawing.Color.Transparent;
+            series1.LabelBorderColor = System.Drawing.Color.Transparent;
             series1.Legend = "Legend1";
-            series1.Name = "Series1";
+            series1.MarkerBorderColor = System.Drawing.Color.Transparent;
+            series1.MarkerColor = System.Drawing.Color.Transparent;
+            series1.MarkerImageTransparentColor = System.Drawing.Color.Transparent;
+            series1.Name = "Nhiệt độ";
+            series1.ShadowColor = System.Drawing.Color.Transparent;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(828, 277);
+            this.chart1.Size = new System.Drawing.Size(827, 277);
             this.chart1.TabIndex = 71;
             this.chart1.Text = "chart1";
+            this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.Normal;
             // 
-            // labCondition
+            // dataGridView1
             // 
-            this.labCondition.AutoSize = true;
-            this.labCondition.BackColor = System.Drawing.Color.Transparent;
-            this.labCondition.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labCondition.ForeColor = System.Drawing.Color.White;
-            this.labCondition.Location = new System.Drawing.Point(29, 468);
-            this.labCondition.Name = "labCondition";
-            this.labCondition.Size = new System.Drawing.Size(30, 15);
-            this.labCondition.TabIndex = 72;
-            this.labCondition.Text = "N/A";
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.GridColor = System.Drawing.Color.Black;
+            this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.dataGridView1.Location = new System.Drawing.Point(845, 488);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(565, 277);
+            this.dataGridView1.TabIndex = 72;
+            // 
+            // labDistrict
+            // 
+            this.labDistrict.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labDistrict.AutoSize = true;
+            this.labDistrict.BackColor = System.Drawing.Color.Transparent;
+            this.labDistrict.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labDistrict.ForeColor = System.Drawing.Color.Transparent;
+            this.labDistrict.Location = new System.Drawing.Point(1170, 9);
+            this.labDistrict.Name = "labDistrict";
+            this.labDistrict.Size = new System.Drawing.Size(87, 20);
+            this.labDistrict.TabIndex = 73;
+            this.labDistrict.Text = "Thành phố";
+            // 
+            // labCoolPlaces
+            // 
+            this.labCoolPlaces.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labCoolPlaces.AutoSize = true;
+            this.labCoolPlaces.BackColor = System.Drawing.Color.Transparent;
+            this.labCoolPlaces.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labCoolPlaces.ForeColor = System.Drawing.Color.Transparent;
+            this.labCoolPlaces.Location = new System.Drawing.Point(507, 225);
+            this.labCoolPlaces.Name = "labCoolPlaces";
+            this.labCoolPlaces.Size = new System.Drawing.Size(150, 22);
+            this.labCoolPlaces.TabIndex = 74;
+            this.labCoolPlaces.Text = "Địa điểm mát mẻ:";
+            // 
+            // labTourSuggestions
+            // 
+            this.labTourSuggestions.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labTourSuggestions.AutoSize = true;
+            this.labTourSuggestions.BackColor = System.Drawing.Color.Transparent;
+            this.labTourSuggestions.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labTourSuggestions.ForeColor = System.Drawing.Color.White;
+            this.labTourSuggestions.Location = new System.Drawing.Point(507, 259);
+            this.labTourSuggestions.Name = "labTourSuggestions";
+            this.labTourSuggestions.Size = new System.Drawing.Size(98, 22);
+            this.labTourSuggestions.TabIndex = 75;
+            this.labTourSuggestions.Text = "Gợi ý tour:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackgroundImage = global::WeatherApp.Properties.Resources.bg4;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1454, 796);
-            this.Controls.Add(this.labCondition);
+            this.ClientSize = new System.Drawing.Size(1430, 768);
+            this.Controls.Add(this.labTourSuggestions);
+            this.Controls.Add(this.labCoolPlaces);
+            this.Controls.Add(this.labDistrict);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.btnLocation);
             this.Controls.Add(this.labHumidity);
@@ -788,7 +864,6 @@
             this.Controls.Add(this.labTemp_max);
             this.Controls.Add(this.labAdvice);
             this.Controls.Add(this.labFeels_like);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.labDetail2);
             this.Controls.Add(this.label13);
             this.DoubleBuffered = true;
@@ -798,13 +873,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WeatherApplication";
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -823,7 +898,6 @@
         private System.Windows.Forms.Label labTemp_min;
         private System.Windows.Forms.Label labTemp_max;
         private System.Windows.Forms.Label labAdvice;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labFeels_like;
         private System.Windows.Forms.Label labDetail2;
         private System.Windows.Forms.Label label13;
@@ -839,7 +913,10 @@
         private System.Windows.Forms.Label labPressure;
         private System.Windows.Forms.Button btnLocation;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Label labCondition;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label labDistrict;
+        private System.Windows.Forms.Label labCoolPlaces;
+        private System.Windows.Forms.Label labTourSuggestions;
     }
 }
 

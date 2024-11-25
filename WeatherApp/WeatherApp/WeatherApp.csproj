@@ -103,10 +103,6 @@
   <ItemGroup>
     <Content Include="API.txt" />
     <Content Include="Resources\if-weather-2-2682849_90781.ico" />
-    <None Include="Resources\bg4.jpg" />
-    <None Include="Resources\bg3.jpg" />
-    <None Include="Resources\bg2.jpg" />
-    <None Include="Resources\bg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -95,6 +95,7 @@ namespace Weather_Application
             public wind wind { get; set; }
             public sys sys { get; set; }
             public clouds clouds { get; set; }
+            public string name { get; set; }
 
         }
 
