@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
-using System.Net.Http; // giao thức HTTP để tải dữ liệu từ API
+using System.Net.Http; 
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Weather_Application.WeatherInfo;
-using System.Diagnostics;// Thư viện này sẽ giúp chúng ta mở trình duyệt web mặc định của máy tính
-
+using System.Diagnostics;
+    
 namespace WeatherApp
 {
     public partial class Form1 : Form
@@ -19,33 +19,26 @@ namespace WeatherApp
         private string currentCity;
         private string currentCountry;
         private HttpClient httpClient = new HttpClient();
-        #region API Key
+        #region API 
         private string APIKey = "68d42b9ada53b7dacca41373c7c14a71"; // API key
         #endregion
         public Form1()
         {
             InitializeComponent();
-            // Khởi tạo timer cho đồng hồ
             timerDateTime = new Timer { Interval = 1000 };
             timerDateTime.Tick += TimerDateTime_Tick;
             timerDateTime.Start();
             timerWeatherUpdate = new Timer { Interval = 1800000 };
             timerWeatherUpdate.Tick += TimerWeatherUpdate_Tick;
-            // Bắt sự kiện khi nhấn Enter trong TextBox thành phố
             TBCity.KeyPress += TBCity_KeyPress;
-
-            // Kiểm tra kết nối internet
             Task<bool> task = CheckInternetConnection();
-
-            // Khởi tạo DataGridView
+            Task GetCurernt = GetCurrentLocationWeather();
             InitializeDataGridView();
-
-            // Khởi tạo AutoComplete
             SetupAutoComplete();
 
         }
 
-        // Kiểm tra kết nối với server OpenWeatherMap
+        // Kiểm tra kết nối
         private async Task<bool> CheckInternetConnection()
         {
             try
@@ -75,13 +68,12 @@ namespace WeatherApp
                     TBCity.AutoCompleteCustomSource = autoCompleteCollection;
                 }
             }
-            // Xóa dữ liệu cũ khi người dùng xóa hết nội dung trong TextBox
             if (string.IsNullOrEmpty(input))
-            {
-                TBCity.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+           {
+               TBCity.AutoCompleteCustomSource = new AutoCompleteStringCollection();
             }
         }
-        
+
 
         // Xử lý sự kiện khi nhấn Enter trong TextBox thành phố
         private async void TimerWeatherUpdate_Tick(object sender, EventArgs e)
@@ -91,18 +83,15 @@ namespace WeatherApp
                 await GetWeatherByCity(currentCity);// Lấy thông tin thời tiết theo thành phố
             }
         }
-
-        // Khởi tạo DataGridView
         private void InitializeDataGridView()
         {
-            DataGridView grid = new DataGridView(); // Tạo một DataGridView mới
-            // Xóa cột cũ và thiết lập cơ bản
+            DataGridView grid = new DataGridView(); 
             dataGridView1.Columns.Clear();
             dataGridView1.TopLeftHeaderCell.Value = "Thời tiết trong tuần";
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
-            // Thêm các cột với cấu hình riêng lẻ
+            // Thêm các cột
             AddTextColumn("DayOfWeek", "Thứ", 50);
             AddTextColumn("Date", "Ngày", 100);
             AddTextColumn("Temperature", "Nhiệt Độ", 30);
@@ -195,7 +184,6 @@ namespace WeatherApp
                 // Cập nhật giao diện
                 await UpdateCurrentWeather(currentInfo);
                 await UpdateForecast(forecastInfo);
-
                 // Kiểm tra và hiển thị thông báo thiên tai
                 foreach (var weather in currentInfo.weather)
                 {
@@ -481,8 +469,8 @@ namespace WeatherApp
                     backgroundImage = "nang.jpg"; // Hình nền mặc định nếu không rõ điều kiện thời tiết
                     break;
             }
-            this.BackgroundImage = Image.FromFile(backgroundImage); // Thiết lập hình nền cho form
-            this.BackgroundImageLayout = ImageLayout.Stretch; // Để hình nền căng
+            this.BackgroundImage = Image.FromFile(backgroundImage); 
+            this.BackgroundImageLayout = ImageLayout.Stretch; 
         }
 
         // Cập nhật dữ liệu dự báo thời tiết
@@ -492,17 +480,14 @@ namespace WeatherApp
             await Update7DayForecast(forecastInfo);
         }
 
-        // Hàm cập nhật dữ liệu cho DataGridView với dự báo 7 ngày
         private async Task Update7DayForecast(ForecastRoot forecastInfo)
         {
             dataGridView1.Rows.Clear();
-            // Lấy danh sách dự báo cho 7 ngày tiếp theo
             var dailyForecasts = GetNext7DaysForecasts(forecastInfo);
             List<Task<Bitmap>> imageTasks = new List<Task<Bitmap>>();
 
-            // Xác định thứ đầu tiên (thứ Hai) trong tuần tới
             DateTime currentDate = DateTime.UtcNow.Date;
-            DateTime startOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek + 1); // Ngày bắt đầu từ thứ Hai
+            DateTime startOfWeek = currentDate.AddDays(-(int)currentDate.DayOfWeek + 1); 
 
             for (int day = 0; day < 7; day++)
             {
@@ -510,7 +495,7 @@ namespace WeatherApp
 
                 // Tìm dự báo gần nhất cho ngày đó hoặc sao chép dự báo cuối cùng nếu thiếu
                 var forecast = dailyForecasts.FirstOrDefault(f => ConvertDateTime(f.dt).Date == targetDate.Date)
-                               ?? dailyForecasts.Last(); // Sử dụng dự báo cuối nếu thiếu
+                               ?? dailyForecasts.Last(); 
                 DateTime forecastDateTime = ConvertDateTime(forecast.dt);
                 double tempCelsius = forecast.main.temp - 273;
                 string condition = forecast.weather[0].description;
@@ -519,7 +504,7 @@ namespace WeatherApp
                 imageTasks.Add(GetImageFromUrl(iconUrl));
 
                 dataGridView1.Rows.Add(
-                    dayOfWeek, // Hiển thị tên thứ
+                    dayOfWeek, 
                     targetDate.ToShortDateString(),
                     $"{tempCelsius:0.#}°C",
                     condition,
@@ -595,7 +580,7 @@ namespace WeatherApp
                 else
                 {
                     // Màu mặc định
-                    chart1.Series[0].Points[i].Color = Color.Blue; 
+                    chart1.Series[0].Points[i].Color = Color.Blue;
                 }
             }
 
@@ -635,7 +620,6 @@ namespace WeatherApp
                 }
                 else
                 {
-                    // Trả về null nếu không thể tải hình ảnh
                     return null;
                 }
             }
@@ -656,9 +640,9 @@ namespace WeatherApp
         }
 
         // Biến để kiểm tra xem cảnh báo bão đã được hiển thị hay chưa
-        private bool stormWarningDisplayed = false; // Cảnh báo bão
-        private bool earthquakeWarningDisplayed = false;// Cảnh báo động đất
-        private bool tsunamiWarningDisplayed = false;// Cảnh báo sóng thần
+        private bool stormWarningDisplayed = false; 
+        private bool earthquakeWarningDisplayed = false;
+        private bool tsunamiWarningDisplayed = false;
 
         // Hàm để cập nhật lời khuyên
         private void UpdateWeatherAdvice(string condition)
@@ -690,8 +674,8 @@ namespace WeatherApp
                     labAdvice.Text = "Trời mưa phùn lớn, bạn nên mang theo ô và áo mưa đề phòng.";
                     break;
                 case "clear sky":
-                    labDetail2.Text = "Trời quang đãng";
-                    labAdvice.Text = "Trời quang đãng, bạn có thể thoải mái đi lại.";
+                    labDetail2.Text = "Trời quang ";
+                    labAdvice.Text = "Trời quang , bạn có thể thoải mái đi lại.";
                     break;
                 case "few clouds":
                     labDetail2.Text = "Ít mây";

@@ -460,9 +460,8 @@
             this.TBCity.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TBCity.ForeColor = System.Drawing.Color.Black;
             this.TBCity.Location = new System.Drawing.Point(366, 50);
-            this.TBCity.Multiline = true;
             this.TBCity.Name = "TBCity";
-            this.TBCity.Size = new System.Drawing.Size(686, 22);
+            this.TBCity.Size = new System.Drawing.Size(686, 27);
             this.TBCity.TabIndex = 52;
             // 
             // label1
