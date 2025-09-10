@@ -8,8 +8,8 @@
 
 ## 🌟 Tính Năng Nổi Bật
 - 🔍 **Tìm kiếm thời tiết:** Tra cứu thời tiết cho nhiều thành phố và địa điểm khác nhau.  
-- 🌡️ **Xem thông tin thời tiết chi tiết:** Nhiệt độ, độ ẩm, áp suất, tốc độ gió, tình trạng mây, v.v.  
-- ⚠️ **Cảnh báo thời tiết & thiên tai:** Thông báo bão, mưa lớn, nắng nóng, rét đậm.  
+- 🌡️ **Xem thông tin thời tiết chi tiết:** Nhiệt độ, độ ẩm, áp suất, tốc độ gió, tình trạng mây, thay đổi hình nền ứng dụng dựa vào thời tiết  v.v.  
+- ⚠️ **Cảnh báo thời tiết & thiên tai:** Thông báo trạng thái thời tiết cho người dùng trước khi ra kế hoạch như bão, mưa lớn, nắng nóng, rét đậm, tuyết, bão tuyết.  
 - 🗺️ **Gợi ý tour du lịch:** Đề xuất các hoạt động và điểm đến phù hợp dựa trên điều kiện thời tiết.  
 
 ---
