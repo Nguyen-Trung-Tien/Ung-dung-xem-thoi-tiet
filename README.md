@@ -46,5 +46,5 @@ Chạy ứng dụng bằng Visual Studio (F5 hoặc Start Debugging).
 . Các tour du lịch được gợi ý dựa trên nhiệt độ và điều kiện thời tiết.
 
 ```
-<img width="945" height="575" alt="image" src="https://github.com/user-attachments/assets/d76cafa7-2843-423a-8554-684f9424b415" />
+<img width="1918" height="1020" alt="HinhAnhSanPham" src="https://github.com/user-attachments/assets/c51a82d9-8552-4824-aa1b-2d3c5816e9a8" />
 
