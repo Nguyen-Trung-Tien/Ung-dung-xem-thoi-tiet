@@ -17,8 +17,8 @@
 ## 🛠️ Công Nghệ Sử Dụng
 - **Ngôn ngữ:** C#  
 - **Framework:** .NET  
-- **API thời tiết:** OpenWeatherMap (hoặc API tương tự)  
-- **Giao diện:** Windows Forms / WPF (tuỳ chọn)  
+- **API thời tiết:** OpenWeatherMap
+- **Giao diện:** Windows Forms
 
 ---
 
