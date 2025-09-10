@@ -44,6 +44,7 @@ Chạy ứng dụng bằng Visual Studio (F5 hoặc Start Debugging).
 . Giao diện chính hiển thị thời tiết hiện tại và dự báo.
 . Hệ thống cảnh báo tự động hiển thị pop-up khi có thiên tai hoặc thời tiết bất thường.
 . Các tour du lịch được gợi ý dựa trên nhiệt độ và điều kiện thời tiết.
-<img width="945" height="575" alt="image" src="https://github.com/user-attachments/assets/d76cafa7-2843-423a-8554-684f9424b415" />
 
 ```
+<img width="945" height="575" alt="image" src="https://github.com/user-attachments/assets/d76cafa7-2843-423a-8554-684f9424b415" />
+
